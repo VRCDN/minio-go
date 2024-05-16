@@ -343,7 +343,7 @@ func EncodePath(pathName string) string {
 // We support '.' with bucket names but we fallback to using path
 // style requests instead for such buckets.
 var (
-	validBucketName       = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9\.\-\_\:]{1,61}[A-Za-z0-9]$`)
+	validBucketName       = regexp.MustCompile(`^[A-Za-z0-9\_][A-Za-z0-9\.\-\_\:]{1,61}[A-Za-z0-9\_]$`)
 	validBucketNameStrict = regexp.MustCompile(`^[a-z0-9][a-z0-9\.\-]{1,61}[a-z0-9]$`)
 	ipAddress             = regexp.MustCompile(`^(\d+\.){3}\d+$`)
 )
@@ -386,7 +386,7 @@ func CheckValidBucketName(bucketName string) (err error) {
 // This is a stricter version.
 // - http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html
 func CheckValidBucketNameStrict(bucketName string) (err error) {
-	return checkBucketNameCommon(bucketName, true)
+	return checkBucketNameCommon(bucketName, false)
 }
 
 // CheckValidObjectNamePrefix - checks if we have a valid input object name prefix.
